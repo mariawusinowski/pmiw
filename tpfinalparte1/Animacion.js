@@ -1,4 +1,4 @@
-//La animación del inicio va a ir acá. WORK IN PROGRESS
+//La animación del inicio va a ir acá.
 
 function Animacion(){
 
@@ -11,7 +11,7 @@ function Animacion(){
    text("Viaje submarino - Paul Granger",400,300);
    text("Elige tu propia aventura",400,350);
 
-   if (tiempoActual >= 200){
+   if (tiempoActual >= 160){
    fase = 2;
    }
   }

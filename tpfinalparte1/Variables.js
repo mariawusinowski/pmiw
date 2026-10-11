@@ -5,6 +5,7 @@ let posXtexto = 50;
 
 //Para saber en que pantalla estamos
 let pantallaActual = 0;
+let pantallaAnterior = 0;
 
 //Para pasar los textos
 let parrafo = 0;
@@ -23,7 +24,7 @@ let DejasMaray;
 let Traicion;
 let Vuelta;
 
-//Animacion credito
+//Animacion créditos
 
 let fondoY = 0;
 let opacidad = 0;

@@ -17,6 +17,7 @@ function Precarga(){
   
 }
 
+//Inicia el juego
 function Boton(){ 
   stroke(0);
   fill(valor);

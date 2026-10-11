@@ -1,12 +1,14 @@
-function preload(){
+//https://youtu.be/PEmc4Z30Gl8
+
+function preload() {
   Precarga();
 }
 
 //Es un montón, pero todo ese texto es la narrativa
 function setup() {
- createCanvas(800, 450); 
- fondos = [Propuesta,Maray,Malo,Neutral,Bueno,Abandonar,ExplorarCueva,Cofres,DejasMaray,Traicion,Vuelta,Calamar];
- textos = ["Eres un/a renombrado/a explorador/a marino a pesar de tu poca experiencia en el ámbito laboral, pero un día al terminar una expedición de tres meses una agencia privada se te acerca con una propuesta… Interesante, si crees que tus grandes capacidades pueden ayudarte a encontrar la ciudad perdida de Atlantis. Te encuentras perplejo/a por la propuesta, dado que muchos en tu ámbito se han burlado de la posibilidad de la existencia del Atlantis, pero en el fondo tú crees en esa pequeña posibilidad; esa esperanza de que hay algo en el mar esperando a ser descubierto.",
+  createCanvas(800, 450);
+  fondos = [Propuesta, Maray, Malo, Neutral, Bueno, Abandonar, ExplorarCueva, Cofres, DejasMaray, Traicion, Vuelta, Calamar];
+  textos = ["Eres un/a renombrado/a explorador/a marino a pesar de tu poca experiencia en el ámbito laboral, pero un día al terminar una expedición de tres meses una agencia privada se te acerca con una propuesta… Interesante, si crees que tus grandes capacidades pueden ayudarte a encontrar la ciudad perdida de Atlantis. Te encuentras perplejo/a por la propuesta, dado que muchos en tu ámbito se han burlado de la posibilidad de la existencia del Atlantis, pero en el fondo tú crees en esa pequeña posibilidad; esa esperanza de que hay algo en el mar esperando a ser descubierto.",
     "Accedes a la misión con gusto y emoción, y pronto te embarcas en las profundidades del mar Atlántico, sujeto/a al Maray mediante un cable, la embarcación que se encargará de tu seguridad. Aunque por petición de la compañía llevas puesto un traje especial que te permitirá explorar y caminar en las profundidades del mar sin mayor dificultad.",
     "¿Qué deseas hacer?",
     "Exploras la saliente cercana al Seeker, no vale la pena arriesgarse de maneras innecesarias al soltarse del Maray, aún no has visto nada que valga la pena tomar ese riesgo, todavía. La saliente es increíblemente bella, llena de vida marina de todo tipo, pero la formación rocosa impide explorar más a profundidad sin las herramientas apropiadas. Las cuales no sacaste porque habría sido increíblemente inconveniente.",
@@ -37,70 +39,191 @@ function setup() {
     "Sacas foto del mapa y prendes la radio, la cual anda débilmente, anunciando tu vuelta y tu descubrimiento. Vuelves a la superficie y haces público tus conocimientos junto a la agencia privada que te contrató, con esto tu nombre está enmarcado en la historia como la primera persona en encontrar pruebas de la existencia de Atlantis.",
     "Eres invitado/a a un evento en un barco, con gente rica y famosa, para hablar de tu experiencia en esta investigación, y accedes con mucha emoción. Te encuentras en la popa del barco tomando martini, cuando sientes que alguien se te acerca por detrás.  Te das la vuelta, seguro es alguien que quiere un autógrafo, pero esta persona está tapada de pies a cabeza… De un momento a otro, eres empujado/a hacia el mar, y sientes cómo eres arrastrado/a hacia el fondo del mar.",
     "Solo tienes que subir, puedes mantener la respiración hasta entonces. Pero antes de seguir, sientes cómo el agua se mueve a tu alrededor, y en la oscuridad divisas un tiburón; solo es uno, dos, tres… Ninguno parece interesado en tu martini.",
-    "",
-    
-    
-    ];
-  }
+
+
+  ];
+}
 
 
 function draw() {
   background(0);
-  
-  if(fase < 4){
-   Animacion();
-   tiempoActual = frameCount;
-   Boton();
-  }
-  
-  if(fase == 4){
-  
-  Pantallas(fondos[pantallaActual], textos[pantallaActual]);
 
-}
+  if (fase < 4) {
+    Animacion();
+    tiempoActual = frameCount;
+    Boton();
   }
+
+  if (fase == 4) {
+    if (pantallaActual !== pantallaAnterior) {
+      parrafo = 0;
+      pantallaAnterior = pantallaActual;
+    }
+    Pantallas(fondos[pantallaActual], textos[pantallaActual]);
+  }
+}
 
 function mousePressed() {
-  
+
   //Control de inicio de historia
-  if (fase == 3){
-    if (dist(mouseX, mouseY, botonposX, botonposY) < 40){
+  if (fase == 3) {
+    if (dist(mouseX, mouseY, botonposX, botonposY) < 40) {
       pantallaActual = 0;
       parrafo = 0;
       fase = 4;
     }
   }
-}
-  //Botones primeras decisiones
-   
-/*  if(fase == 4 && pantallaActual == 0){
-  //Control botón 1 explorar
-  if(mouseX >= 40 && mouseX <= 390 && mouseY >= 250 && mouseY <= 300){
-    pantallaActual = 6;
-}
-  //Control botón 2 soltarse maray
-  if(mouseX >= 410 && mouseX <= 760 && mouseY >= 250 && mouseY <=300){
-  pantallaActual = 8;
-  }
- }
- //Explorar cueva
-  if (fase == 4 && pantallaActual == 6) {
-    if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
-         pantallaActual = 11;        
-}
- }
- //Decisiones del calamar
-  if (fase == 4 && pantallaActual == 11) {
-    
- //Esperar a que se vaya
-  if (mouseX >= 40 && mouseX <= 390 && mouseY >= 250 && mouseY <= 300) {
-      pantallaActual = 8;
-  }
-  /*  // Abandonar el Seeker ESTE BLOQUE ES EL PROBLEMATICO NO SE QUE ONDA
-    else if (mouseX >= 410 && mouseX <= 760 && mouseY >= 250 && mouseY <= 300) {
-      
-      pantallaActual = 5;
+
+  //Permiten el cambio de pantalla
+  if (fase == 4 && pantallaActual == 0) {
+    if (parrafo < 2) {
+      if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
+        parrafo++;
+      }
+    } else {
+      if (mouseX >= 40 && mouseX <= 390 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 11;
+        parrafo = 0;
+      } else if (mouseX >= 410 && mouseX <= 760 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 8;
+        parrafo = 0;
+      }
     }
   }
-  */
+
+  //Saliente Seeker - cambio pantalla
+  if (fase == 4 && pantallaActual == 11) {
+    if (parrafo < 3) {
+      if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
+        parrafo++;
+      }
+    } else {
+      if (mouseX >= 40 && mouseX <= 390 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 8;
+        parrafo = 0;
+      } else if (mouseX >= 410 && mouseX <= 760 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 5;
+        parrafo = 0;
+      }
+    }
+  }
+
+  //Abandonas Seeker - cambio pantalla
+  if (fase == 4 && pantallaActual == 5) {
+    if (parrafo < 2) {
+      if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
+        parrafo++;
+      }
+    } else {
+      if (mouseX >= 40 && mouseX <= 390 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 2;
+        parrafo = 0;
+      } else if (mouseX >= 410 && mouseX <= 760 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 3;
+        parrafo = 0;
+      }
+    }
+  }
+
+  //Final Malo - Cambio pantalla y reinicio
+  if (fase == 4 && pantallaActual == 2) {
+    if (parrafo < 1) {
+      if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
+        parrafo++;
+      }
+    } else {
+      if (mouseX >= 300 && mouseX <= 500 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 0;
+        fase = 1;
+        opacidad = 0;
+        fondoY = 0;
+        tiempoActual = 0;
+        parrafo = 0;
+      }
+    }
+  }
+
+  //Final Neutral - Cambio pantalla y reinicio
+  if (fase == 4 && pantallaActual == 3) {
+    if (parrafo < 2) {
+      if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
+        parrafo++;
+      }
+    } else {
+      if (mouseX >= 300 && mouseX <= 500 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 0;
+        fase = 1;
+        opacidad = 0;
+        fondoY = 0;
+        tiempoActual = 0;
+        parrafo = 0;
+      }
+    }
+  }
+
+  //No - cambio pantalla
+  if (fase == 4 && pantallaActual == 8) {
+    if (parrafo < 2) {
+      if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
+        parrafo++;
+      }
+    } else {
+      if (mouseX >= 40 && mouseX <= 390 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 6;
+        parrafo = 0;
+      } else if (mouseX >= 410 && mouseX <= 760 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 3;
+        parrafo = 0;
+      }
+    }
+  }
+
+  //Si - Decides adentrarte
+  if (fase == 4 && pantallaActual == 6) {
+    if (parrafo < 4) {
+      if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
+        parrafo++;
+      }
+    } else {
+      if (mouseX >= 40 && mouseX <= 390 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 9;
+        parrafo = 0;
+      } else if (mouseX >= 410 && mouseX <= 760 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 4;
+        parrafo = 0;
+      }
+    }
+  }
+
+  //Final Bueno - Cambio pantalla y reinicio
+  if (fase == 4 && pantallaActual == 4) {
+    if (parrafo < 3) {
+      if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
+        parrafo++;
+      }
+    } else {
+      if (mouseX >= 300 && mouseX <= 500 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 0;
+        fase = 1;
+        opacidad = 0;
+        fondoY = 0;
+        tiempoActual = 0;
+        parrafo = 0;
+      }
+    }
+  }
+
+  //Traición - Cambio de pantalla
+  if (fase == 4 && pantallaActual == 9) {
+    if (parrafo < 3) {
+      if (mouseX >= 550 && mouseX <= 750 && mouseY >= 250 && mouseY <= 300) {
+        parrafo++;
+      }
+    } else {
+      if (mouseX >= 410 && mouseX <= 760 && mouseY >= 250 && mouseY <= 300) {
+        pantallaActual = 2;
+        parrafo = 0;
+      }
+    }
+  }
 }
