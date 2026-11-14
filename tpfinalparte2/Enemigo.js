@@ -1,17 +1,22 @@
 class Enemigo {
  constructor(){
-   this.posX = 50;
-   this.posY = 300;
-   this.Color = color(255,0,0);
+   this.posX = 750;
+   this.posiblesPosicionesY = [120,190,270];
+   this.posY = this.posiblesPosicionesY[1];
+   
+   this.contadorDisparos = 0;
+   this.disparosParaCambiar = 4;
+
+   this.Color = color(180,30,180);
+   }
+ 
+ cambiarPosicion(){
+   let indiceAleatorio = floor(random(this.posiblesPosicionesY.length));
+   this.posY = this.posiblesPosicionesY[indiceAleatorio];
  }
  
  dibujar(){
   fill(this.Color);
-  rect(this.posX, this.posY, 50, 60);
+  ellipse(this.posX, this.posY, 80, 100);
  }
- 
- mata(){
-  //lógica para que al tocar al jugador lo mate y o pierda una vida, o lo mate instantáneamente
- }
- 
 }
